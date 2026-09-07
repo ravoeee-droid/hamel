@@ -1,0 +1,1 @@
+Vercel: Import Git Repository -> ravoeee-droid/hamel -> Deploy. vercel.json steuert Build und Output. Keine Environment Variables erforderlich.
