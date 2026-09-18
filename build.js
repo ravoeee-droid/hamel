@@ -86,7 +86,29 @@ const worldStyles = `
     .visual-break-media{min-height:58svh}
   }
 `;
-if (!html.includes('.image-world{')) html = html.replace('</style>', worldStyles + '</style>');
+if (!html.includes('.image-world{')) html = html.replace('
+  /* HAMEL IMAGE FIDELITY HOTFIX
+     Never soften source photography with WebGL resampling, forced zooms or CSS filters. */
+  .hero-canvas{display:none!important}
+  .hero-fallback{
+    opacity:1!important;
+    filter:none!important;
+    transform:none!important;
+    object-fit:cover;
+    image-rendering:auto;
+  }
+  .media-ribbon-visual img,
+  .generation-spotlight-media img,
+  .founder-photo img,
+  .world-shot img,
+  .visual-break-media img,
+  .network-photo img,
+  .legacy-bg{
+    filter:none!important;
+    transform:none!important;
+    image-rendering:auto;
+  }
+</style>', worldStyles + '</style>');
 
 const imageWorld = `
 <section class="image-world" aria-label="Bildwelt Landwirtschaft, Tierhaltung und Logistik">
