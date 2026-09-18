@@ -88,16 +88,16 @@ const imageWorld = `
 <section class="image-world" aria-label="Bildwelt Landwirtschaft, Tierhaltung und Logistik">
   <div class="wrap image-world-head">
     <div><div class="eyebrow">Landwirtschaft · Tierhaltung · Logistik</div><h2>Ein Betrieb,<br>den man spüren kann.</h2></div>
-    <p>Die Bildwelt übersetzt HAMEL in echte Situationen: Tiere, Fläche, Hof und Bewegung. Ruhig, hochwertig und bodenständig statt austauschbarer Stock-Optik.</p>
+    <p>Landwirtschaft, Tiervermarktung und Logistik gehören bei HAMEL zusammen. Vom Hof über die Vermarktung bis auf die Straße entstehen kurze Wege, persönliche Abstimmung und verlässliche Abläufe.</p>
   </div>
   <div class="image-world-grid">
     <figure class="world-shot">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1778949367453-168e90145d58?auto=format&fit=crop&w=2000&q=86" alt="Rinder auf einer Weide im Abendlicht">
-      <figcaption><b>Tierhaltung</b><span>Nähe · Verantwortung</span></figcaption>
+      <img loading="lazy" src="assets/truck.avif" alt="HAMEL Tiertransport-Lkw im ländlichen Raum">
+      <figcaption><b>Unterwegs für die Landwirtschaft</b><span>Vermarktung · Logistik</span></figcaption>
     </figure>
     <figure class="world-shot">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1503054578884-5753a0efe39f?auto=format&fit=crop&w=1600&q=86" alt="Landwirtschaftliche Flächen aus der Luft">
-      <figcaption><b>Landwirtschaft</b><span>Fläche · Herkunft</span></figcaption>
+      <img loading="lazy" src="assets/generations.avif" alt="Volker und Johannes Hamel – zwei Generationen des Familienunternehmens">
+      <figcaption><b>Zwei Generationen</b><span>Erfahrung · Zukunft</span></figcaption>
     </figure>
     <figure class="world-shot">
       <img loading="lazy" src="https://images.unsplash.com/photo-1761481253997-10501d9f4c23?auto=format&fit=crop&w=1600&q=86" alt="Landwirtschaftlicher Hof im warmen Abendlicht">
@@ -113,9 +113,9 @@ const visualBreak = `
 <section class="visual-break" aria-label="Landwirtschaft im Alltag">
   <div class="visual-break-grid">
     <div class="visual-break-copy">
-      <div class="eyebrow">Praxis statt Prospekt</div>
+      <div class="eyebrow">Landwirtschaft aus eigener Praxis</div>
       <h2>Landwirtschaft ist hier kein Motiv. Sie ist Alltag.</h2>
-      <p>HAMEL verbindet Vermarktung und Logistik mit eigener landwirtschaftlicher Praxis. Die neue Bildsprache macht genau diese Verbindung sichtbar und gibt den langen Storytelling-Passagen endlich visuelle Spannung.</p>
+      <p>HAMEL verbindet Viehhandel, Vermarktung und Logistik mit eigener landwirtschaftlicher Praxis. Wer Tiere, Stall und Betrieb selbst kennt, spricht mit Landwirten auf Augenhöhe und trifft Entscheidungen mit Blick für den Alltag vor Ort.</p>
     </div>
     <figure class="visual-break-media">
       <img loading="lazy" src="https://images.unsplash.com/photo-1763349212487-ec3f9a238074?auto=format&fit=crop&w=2200&q=86" alt="Rinder auf einer Weide bei Sonnenuntergang">
@@ -129,8 +129,17 @@ if (!html.includes('aria-label="Landwirtschaft im Alltag"')) {
 // Avoid repeating the same HAMEL truck photo in the editorial ribbon.
 html = html.replace(
   '<img src="assets/truck.avif" alt="HAMEL Lkw im ländlichen Raum">',
-  '<img loading="lazy" src="https://images.unsplash.com/photo-1761481253997-10501d9f4c23?auto=format&fit=crop&w=2200&q=86" alt="Landwirtschaftlicher Hof im warmen Abendlicht">'
+  '<img loading="lazy" src="assets/truck.avif" alt="HAMEL Tiertransport-Lkw im ländlichen Raum">'
 );
+
+
+// Final public-copy cleanup: remove research labels / draft-like UI from the customer-facing page.
+html = html
+  .replace(/<small>Quelle:[^<]*<\/small>/g, '')
+  .replace(/<div class="network-source">Quelle:[^<]*<\/div>/g, '')
+  .replace(/<a class="external-proof"[^>]*>[^<]*Pressemitteilung[^<]*<\/a>/g, '')
+  .replace(/<a href="https:\/\/www\.viehhandlung-hamel\.de\/"[^>]*>Bisheriger Webauftritt ↗<\/a>/g, '')
+  .replaceAll('HAMEL IMAGE WORLD V2', 'HAMEL');
 
 fs.writeFileSync(path.join(dist, 'index.html'), html);
 fs.writeFileSync(path.join(assets, 'hamel-logo.webp'), decodeParts('hamel-logo.webp'));
