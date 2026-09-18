@@ -143,6 +143,7 @@ html = html
   .replace(/<div class="network-source">Quelle:[^<]*<\/div>/g, '')
   .replace(/<a class="external-proof"[\s\S]*?<\/a>/g, '')
   .replace(/<a href="https:\/\/www\.viehhandlung-hamel\.de\/"[^>]*>Bisheriger Webauftritt ↗<\/a>/g, '')
+  .replaceAll('Die Pressemitteilung formuliert ausdrücklich den Wunsch, HAMEL langfristig weiterzuentwickeln und eines Tages in die achte Generation zu übergeben.', 'HAMEL soll langfristig als Familienunternehmen weitergeführt und Schritt für Schritt für die nächste Generation entwickelt werden.')
   .replaceAll('HAMEL IMAGE WORLD V2', 'HAMEL');
 
 fs.writeFileSync(path.join(dist, 'index.html'), html);
