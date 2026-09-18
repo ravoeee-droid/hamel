@@ -137,7 +137,7 @@ html = html.replace(
 html = html
   .replace(/<small>Quelle:[^<]*<\/small>/g, '')
   .replace(/<div class="network-source">Quelle:[^<]*<\/div>/g, '')
-  .replace(/<a class="external-proof"[\\s\\S]*?<\\/a>/g, '')
+  .replace(/<a class="external-proof"[\s\S]*?<\/a>/g, '')
   .replace(/<a href="https:\/\/www\.viehhandlung-hamel\.de\/"[^>]*>Bisheriger Webauftritt ↗<\/a>/g, '')
   .replaceAll('HAMEL IMAGE WORLD V2', 'HAMEL');
 
