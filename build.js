@@ -22,7 +22,11 @@ const htmlGz = Buffer.from(readParts('index.html.gz.b64.'), 'base64');
 let html = zlib.gunzipSync(htmlGz).toString('utf8');
 html = html
   .replaceAll('assets/generations.webp', 'assets/generations.avif')
-  .replaceAll('assets/truck.webp', 'assets/truck.avif');
+  .replaceAll('assets/truck.webp', 'assets/truck.avif')
+  .replace('class="hero-fallback" src="assets/truck.avif"', 'class="hero-fallback" src="assets/hamel-road.avif"')
+  .replace("texture=loader.load('assets/truck.avif'", "texture=loader.load('assets/hamel-road.avif'")
+  .replaceAll('src="assets/generations.avif" alt="Zwei Generationen des HAMEL Familienunternehmens"', 'src="assets/hamel-father-son.avif" alt="Volker und Johannes Hamel – zwei Generationen des Familienunternehmens"')
+  .replaceAll('src="assets/truck.avif" alt="HAMEL Tiertransport-Lkw"', 'src="assets/hamel-road.avif" alt="HAMEL Tiertransport-Lkw auf einer Landstraße"');
 
 const styleMarker = '.external-proof{display:inline-flex;align-items:center;gap:10px;margin-top:34px;padding:11px 14px;border:1px solid var(--line);border-radius:999px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.external-proof i{width:7px;height:7px;background:#75a17d;border-radius:50%}';
 const spotlightStyles = '.generation-spotlight{background:#061712;color:#fff;padding:0;position:relative;overflow:hidden}.generation-spotlight-inner{min-height:88svh;display:grid;grid-template-columns:1.25fr .75fr}.generation-spotlight-media{position:relative;overflow:hidden}.generation-spotlight-media img{width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.96) contrast(1.03);transform:scale(1.015)}.generation-spotlight-media:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 66%,rgba(6,23,18,.12) 82%,rgba(6,23,18,.55))}.generation-spotlight-copy{display:flex;flex-direction:column;justify-content:center;padding:70px clamp(30px,6vw,100px);position:relative}.generation-spotlight-copy:before{content:"";position:absolute;left:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.12)}.generation-spotlight-copy .eyebrow{color:#d7c9b7}.generation-spotlight-copy h2{font:400 clamp(54px,6vw,94px)/.9 Georgia,serif;letter-spacing:-.055em;margin:18px 0 24px}.generation-spotlight-copy p{font-size:17px;line-height:1.7;color:rgba(255,255,255,.65);max-width:520px}.generation-names{display:flex;gap:26px;margin-top:32px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12)}.generation-names div{display:flex;flex-direction:column;gap:3px}.generation-names b{font:400 23px Georgia,serif}.generation-names span{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.43)}';
@@ -33,7 +37,7 @@ const mobileFix = '.founder-photo{border-radius:24px}.generation-spotlight-inner
 if (html.includes(mobileMarker)) html = html.replace(mobileMarker, mobileFix);
 
 const sectionMarker = '</section><section class="media-ribbon">';
-const spotlightSection = '</section><section class="generation-spotlight" aria-label="Volker und Johannes Hamel"><div class="generation-spotlight-inner"><figure class="generation-spotlight-media"><img src="assets/generations.avif" alt="Johannes und Volker Hamel vor einer Steinwand"></figure><div class="generation-spotlight-copy"><div class="eyebrow">Familie · Verantwortung · Übergabe</div><h2>Volker &<br>Johannes Hamel.</h2><p>Zwei Generationen, die das Unternehmen geprägt haben. Die Übergabe 2023 führt die Geschichte des Familienbetriebs weiter – mit Johannes Hamel in alleiniger Geschäftsführung.</p><div class="generation-names"><div><b>Volker Hamel</b><span>Unternehmensentwicklung über Jahrzehnte</span></div><div><b>Johannes Hamel</b><span>alleiniger Geschäftsführer seit 2023</span></div></div></div></div></section><section class="media-ribbon">';
+const spotlightSection = '</section><section class="generation-spotlight" aria-label="Volker und Johannes Hamel"><div class="generation-spotlight-inner"><figure class="generation-spotlight-media"><img src="assets/hamel-father-son.avif" alt="Johannes und Volker Hamel"></figure><div class="generation-spotlight-copy"><div class="eyebrow">Familie · Verantwortung · Übergabe</div><h2>Volker &<br>Johannes Hamel.</h2><p>Zwei Generationen, die das Unternehmen geprägt haben. Die Übergabe 2023 führt die Geschichte des Familienbetriebs weiter – mit Johannes Hamel in alleiniger Geschäftsführung.</p><div class="generation-names"><div><b>Volker Hamel</b><span>Unternehmensentwicklung über Jahrzehnte</span></div><div><b>Johannes Hamel</b><span>alleiniger Geschäftsführer seit 2023</span></div></div></div></div></section><section class="media-ribbon">';
 if (html.includes(sectionMarker) && !html.includes('aria-label="Volker und Johannes Hamel"')) html = html.replace(sectionMarker, spotlightSection);
 
 const founderAnim = "gsap.from('.founder-photo',{clipPath:'inset(8% 10% 8% 10% round 48px)'";
@@ -46,12 +50,12 @@ if (html.includes(founderAnim) && !html.includes("gsap.from('.generation-spotlig
 // HAMEL IMAGE WORLD V2 — close the visual gaps and keep the WebGL hero failsafe visible.
 const worldStyles = `
   .hero-fallback{opacity:1!important}
-  .hero-canvas{opacity:.72;mix-blend-mode:soft-light}\n  .founder-photo{background:url('assets/generations.avif') center/cover no-repeat!important}\n  .founder-photo img{opacity:1!important;visibility:visible!important;object-position:center!important}
+  .hero-canvas{opacity:.72;mix-blend-mode:soft-light}\n  .founder-photo{background:url('assets/hamel-father-son.avif') center/cover no-repeat!important}\n  .founder-photo img{opacity:1!important;visibility:visible!important;object-position:center!important}
   .legacy-bg{filter:saturate(.82) contrast(1.02) brightness(.9)}
   .signature-sticky:before{
     background:
       linear-gradient(90deg,rgba(7,26,21,.96),rgba(7,26,21,.72) 42%,rgba(7,26,21,.88)),
-      url('https://images.unsplash.com/photo-1720155390935-f49e18525eb9?auto=format&fit=crop&w=2400&q=86') center/cover no-repeat!important;
+      url('assets/hamel-road.avif') center/cover no-repeat!important;
   }
   .image-world{padding:0;background:#071a15;color:#fff;overflow:hidden}
   .image-world-head{padding:92px 0 48px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:end}
@@ -92,15 +96,15 @@ const imageWorld = `
   </div>
   <div class="image-world-grid">
     <figure class="world-shot">
-      <img loading="lazy" src="assets/truck.avif" alt="HAMEL Tiertransport-Lkw im ländlichen Raum">
+      <img loading="lazy" src="assets/hamel-road.avif" alt="HAMEL Tiertransport-Lkw auf einer Landstraße">
       <figcaption><b>Unterwegs für die Landwirtschaft</b><span>Vermarktung · Logistik</span></figcaption>
     </figure>
     <figure class="world-shot">
-      <img loading="lazy" src="assets/generations.avif" alt="Volker und Johannes Hamel – zwei Generationen des Familienunternehmens">
+      <img loading="lazy" src="assets/hamel-father-son.avif" alt="Volker und Johannes Hamel – zwei Generationen des Familienunternehmens">
       <figcaption><b>Zwei Generationen</b><span>Erfahrung · Zukunft</span></figcaption>
     </figure>
     <figure class="world-shot">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1761481253997-10501d9f4c23?auto=format&fit=crop&w=1600&q=86" alt="Landwirtschaftlicher Hof im warmen Abendlicht">
+      <img loading="lazy" src="assets/hamel-farm.avif" alt="Landwirtschaftlicher Hof im warmen Abendlicht">
       <figcaption><b>Region</b><span>Hof · Bodenständigkeit</span></figcaption>
     </figure>
   </div>
@@ -118,7 +122,7 @@ const visualBreak = `
       <p>HAMEL verbindet Viehhandel, Vermarktung und Logistik mit eigener landwirtschaftlicher Praxis. Wer Tiere, Stall und Betrieb selbst kennt, spricht mit Landwirten auf Augenhöhe und trifft Entscheidungen mit Blick für den Alltag vor Ort.</p>
     </div>
     <figure class="visual-break-media">
-      <img loading="lazy" src="https://images.unsplash.com/photo-1763349212487-ec3f9a238074?auto=format&fit=crop&w=2200&q=86" alt="Rinder auf einer Weide bei Sonnenuntergang">
+      <img loading="lazy" src="assets/hamel-farm.avif" alt="Rinder auf einer Weide bei Sonnenuntergang">
     </figure>
   </div>
 </section>`;
@@ -129,7 +133,7 @@ if (!html.includes('aria-label="Landwirtschaft im Alltag"')) {
 // Avoid repeating the same HAMEL truck photo in the editorial ribbon.
 html = html.replace(
   '<img src="assets/truck.avif" alt="HAMEL Lkw im ländlichen Raum">',
-  '<img loading="lazy" src="assets/truck.avif" alt="HAMEL Tiertransport-Lkw im ländlichen Raum">'
+  '<img loading="lazy" src="assets/hamel-road.avif" alt="HAMEL Tiertransport-Lkw auf einer Landstraße">'
 );
 
 
@@ -145,6 +149,9 @@ fs.writeFileSync(path.join(dist, 'index.html'), html);
 fs.writeFileSync(path.join(assets, 'hamel-logo.webp'), decodeParts('hamel-logo.webp'));
 fs.writeFileSync(path.join(assets, 'generations.avif'), decodeParts('generations.avif'));
 fs.writeFileSync(path.join(assets, 'truck.avif'), decodeParts('truck.avif'));
+for (const file of ['hamel-road.avif','hamel-farm.avif','hamel-father-son.avif']) {
+  fs.copyFileSync(path.join(src, 'generated', file), path.join(assets, file));
+}
 fs.copyFileSync(path.join(src, 'robots.txt'), path.join(dist, 'robots.txt'));
 
 console.log('HAMEL demo built successfully');
