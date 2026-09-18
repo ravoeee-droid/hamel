@@ -137,6 +137,126 @@ html = html.replace(
 );
 
 
+
+// HAMEL BRAND ALIGNMENT — original blue identity.
+// Keep the premium structure, imagery and motion, but return the complete visual system
+// to the company's established blue/white identity instead of the invented green/copper palette.
+html = html
+  .replaceAll('#071a15', '#151043')
+  .replaceAll('#061712', '#100c35')
+  .replaceAll('#0d2a21', '#211a63')
+  .replaceAll('#14372b', '#30277a')
+  .replaceAll('#0d201a', '#17152f')
+  .replaceAll('#f1eee6', '#f7f7fb')
+  .replaceAll('#e5dfd3', '#eceef5')
+  .replaceAll('#fffdf7', '#ffffff')
+  .replaceAll('#d7c4aa', '#d9ddf1')
+  .replaceAll('#b86d45', '#21146f')
+  .replaceAll('#8e4e31', '#160e52')
+  .replaceAll('#d9ae8f', '#8f88cf')
+  .replaceAll('#e5b99a', '#7168bd')
+  .replaceAll('#ecd6c3', '#f0efff')
+  .replaceAll('#ecd9c8', '#f0efff')
+  .replaceAll('#f4eadc', '#ffffff')
+  .replaceAll('#edd8c3', '#efedff')
+  .replaceAll('#d8ae8e', '#aaa4e1')
+  .replaceAll('#d7ad8c', '#aaa4e1')
+  .replaceAll('#d7c9b7', '#d8d5f4')
+  .replaceAll('#ddcdb5', '#d8d5f4')
+  .replaceAll('#e7d8c8', '#e7e5fb')
+  .replaceAll('rgba(7,26,21,', 'rgba(21,16,67,')
+  .replaceAll('rgba(6,23,18,', 'rgba(16,12,53,')
+  .replaceAll('rgba(184,109,69,', 'rgba(33,20,111,')
+  .replaceAll('rgba(234,202,173,', 'rgba(173,168,225,')
+  .replaceAll('rgba(230,187,151,', 'rgba(170,164,225,')
+  .replaceAll('content="#071a15"', 'content="#21146f"');
+
+const brandStyles = `
+  /* HAMEL brand reset: blue, white, precise, established */
+  :root{
+    --ink:#17152f;
+    --forest:#151043;
+    --forest-2:#211a63;
+    --forest-3:#30277a;
+    --paper:#f7f7fb;
+    --paper-2:#eceef5;
+    --white:#ffffff;
+    --blue:#21146f;
+    --sand:#d9ddf1;
+    --copper:#21146f;
+    --muted:#69687a;
+    --line:rgba(33,20,111,.16);
+    --line-light:rgba(255,255,255,.14);
+    --shadow:0 35px 110px rgba(21,16,67,.16);
+  }
+  body{background:var(--paper);color:var(--ink)}
+  ::selection{background:var(--blue);color:#fff}
+  .loader,.hero,.legacy,.signature,.image-world,.visual-break,.generation-spotlight{background:var(--forest)}
+  .ticker,.proofbar,.media-ribbon{background:#100c35}
+  .nav.scrolled{background:rgba(21,16,67,.9)}
+  .btn-primary{background:var(--blue)}
+  .btn-primary:before{background:#160e52}
+  .hero:before{
+    background:
+      radial-gradient(circle at 75% 12%,rgba(105,94,190,.24),transparent 30%),
+      linear-gradient(180deg,transparent 65%,rgba(8,5,34,.34));
+  }
+  .hero-title em,.timeline .year,.signature-copy h2 em{color:#aaa4e1}
+  .hero .eyebrow,.legacy-kicker,.generation-spotlight-copy .eyebrow,.signature-copy .eyebrow{color:#d8d5f4}
+  .hero-frame{background:#1d1855}
+  .hero-frame:after{
+    background:
+      linear-gradient(180deg,rgba(21,16,67,.02),rgba(21,16,67,.48)),
+      radial-gradient(circle at 80% 16%,rgba(255,255,255,.13),transparent 32%);
+  }
+  .hero-glint{
+    background:radial-gradient(circle,rgba(170,164,225,.28),rgba(170,164,225,0) 70%);
+  }
+  .hero-badge{background:rgba(255,255,255,.97)}
+  .proof b,.legacy-proof b{color:#efedff}
+  .legacy-bg{
+    filter:saturate(.9) contrast(1.04);
+  }
+  .legacy:after{
+    background:linear-gradient(180deg,rgba(21,16,67,.04),rgba(21,16,67,.86) 92%);
+  }
+  .legacy-proof{background:rgba(255,255,255,.14)}
+  .legacy-proof div{background:rgba(21,16,67,.72)}
+  .media-ribbon-visual:after{
+    background:linear-gradient(90deg,transparent 60%,rgba(16,12,53,.72));
+  }
+  .generation-spotlight-media:after{
+    background:linear-gradient(90deg,transparent 66%,rgba(16,12,53,.12) 82%,rgba(16,12,53,.58));
+  }
+  .signature-sticky:before{
+    background:
+      linear-gradient(90deg,rgba(21,16,67,.96),rgba(21,16,67,.7) 42%,rgba(16,12,53,.9)),
+      url('assets/hamel-road.avif') center/cover no-repeat!important;
+  }
+  .sig-road-shadow{stroke:rgba(105,94,190,.18)}
+  .image-world{background:#151043}
+  .world-shot{background:#1d1855}
+  .world-shot:after{background:linear-gradient(180deg,transparent 48%,rgba(10,7,43,.84))}
+  .visual-break{background:#151043}
+  .visual-break-media:after{
+    background:
+      linear-gradient(90deg,rgba(21,16,67,.5),transparent 35%),
+      linear-gradient(180deg,transparent 65%,rgba(21,16,67,.3));
+  }
+  .founder{background:#fff}
+  .founder-lead{color:#4b4960}
+  .founder-photo:after{background:linear-gradient(180deg,transparent 56%,rgba(21,16,67,.48))}
+  .founder-year-stack{background:rgba(21,16,67,.34)}
+  .founder-light{
+    background:radial-gradient(circle,rgba(170,164,225,.2),transparent 68%);
+  }
+  .core{background:var(--blue);box-shadow:0 0 0 30px rgba(33,20,111,.06)}
+  .scroll-progress i{background:linear-gradient(90deg,#21146f,#7168bd)}
+  .ticker-track i{background:#7168bd}
+  .external-proof i{background:#21146f}
+`;
+html = html.replace('</style>', brandStyles + '</style>');
+
 // Final public-copy cleanup: remove research labels / draft-like UI from the customer-facing page.
 html = html
   .replace(/<small>Quelle:[^<]*<\/small>/g, '')
