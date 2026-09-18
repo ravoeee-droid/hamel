@@ -106,7 +106,7 @@ const imageWorld = `
   </div>
 </section>`;
 if (!html.includes('aria-label="Bildwelt Landwirtschaft, Tierhaltung und Logistik"')) {
-  html = html.replace('<section class="legacy">', imageWorld + '<section class="legacy">');
+  html = html.replace('<section class="legacy" id="unternehmen">', imageWorld + '<section class="legacy" id="unternehmen">');
 }
 
 const visualBreak = `
