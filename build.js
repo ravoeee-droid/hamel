@@ -46,7 +46,7 @@ if (html.includes(founderAnim) && !html.includes("gsap.from('.generation-spotlig
 // HAMEL IMAGE WORLD V2 — close the visual gaps and keep the WebGL hero failsafe visible.
 const worldStyles = `
   .hero-fallback{opacity:1!important}
-  .hero-canvas{opacity:.72;mix-blend-mode:soft-light}
+  .hero-canvas{opacity:.72;mix-blend-mode:soft-light}\n  .founder-photo{background:url('assets/generations.avif') center/cover no-repeat!important}\n  .founder-photo img{opacity:1!important;visibility:visible!important;object-position:center!important}
   .legacy-bg{filter:saturate(.82) contrast(1.02) brightness(.9)}
   .signature-sticky:before{
     background:
@@ -137,7 +137,7 @@ html = html.replace(
 html = html
   .replace(/<small>Quelle:[^<]*<\/small>/g, '')
   .replace(/<div class="network-source">Quelle:[^<]*<\/div>/g, '')
-  .replace(/<a class="external-proof"[^>]*>[^<]*Pressemitteilung[^<]*<\/a>/g, '')
+  .replace(/<a class="external-proof"[\\s\\S]*?<\\/a>/g, '')
   .replace(/<a href="https:\/\/www\.viehhandlung-hamel\.de\/"[^>]*>Bisheriger Webauftritt ↗<\/a>/g, '')
   .replaceAll('HAMEL IMAGE WORLD V2', 'HAMEL');
 
